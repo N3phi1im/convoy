@@ -226,19 +226,6 @@ go test ./... -v
 go test ./... -cover
 ```
 
-**Integration Tests (with real database):**
-```bash
-# Using helper script (recommended)
-./scripts/run-tests.sh
-
-# Or manually with docker-compose
-docker compose up -d postgres
-docker compose run --rm test
-
-# Run specific test package
-docker compose run --rm test go test ./internal/repository/postgres -v
-```
-
 ### Code Quality
 
 ```bash
