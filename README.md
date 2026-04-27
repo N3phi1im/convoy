@@ -68,7 +68,7 @@ The easiest way to run Convoy is using Docker Compose - it runs everything (data
 
 ```bash
 # 1. Clone the repository
-git clone <repository-url>
+git clone https://github.com/N3phi1im/convoy.git
 cd convoy
 
 # 2. Create .env file and configure
@@ -133,25 +133,14 @@ JWT_EXPIRY=24h
 ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
 ```
 
-#### 2. Database Setup & Run
+#### 2. Run
 
-**Option A: Full Stack (Recommended)**
 ```bash
 # Starts database, runs migrations automatically, and starts API
 docker compose up -d
 
 # View logs
 docker compose logs -f api
-```
-
-**Option B: Database Only (for local development)**
-```bash
-# Setup database and run migrations
-chmod +x scripts/setup-db.sh
-./scripts/setup-db.sh
-
-# Then run API locally
-go run cmd/server/main.go
 ```
 
 The API will be available at `http://localhost:8080`
@@ -178,6 +167,7 @@ Create `web/.env`:
 
 ```env
 VITE_API_URL=http://localhost:8080/api/v1
+VITE_MAPBOX_TOKEN=your_mapbox_api_key
 ```
 
 #### 3. Start Development Server
@@ -198,17 +188,6 @@ npm run build
 ## API Endpoints
 
 See [docs/API.md](docs/API.md) for detailed API documentation.
-
-### Core Endpoints
-
-- `POST /api/v1/auth/register` - User registration
-- `POST /api/v1/auth/login` - User login
-- `POST /api/v1/routes` - Create a new route
-- `GET /api/v1/routes/:id` - Get route details
-- `POST /api/v1/routes/:id/join` - Join a route
-- `GET /api/v1/routes/:id/participants` - List participants
-- `PUT /api/v1/routes/:id` - Update route (creator only)
-- `DELETE /api/v1/routes/:id` - Delete route (creator only)
 
 ## Development
 
@@ -233,16 +212,10 @@ go test ./... -cover
 go fmt ./...
 ```
 
-## Map Provider Integration
-
-The application uses Mapbox by default but supports pluggable map providers. See [docs/MAP_INTEGRATION.md](docs/MAP_INTEGRATION.md) for details.
-
 ### Mapbox Features Used
 
 - **Directions API**: Route planning and optimization
 - **Geocoding API**: Address to coordinates conversion
-- **Static Maps API**: Route preview images
-- **Navigation SDK**: Turn-by-turn directions
 
 ## Deployment
 
